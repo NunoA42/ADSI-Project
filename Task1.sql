@@ -94,7 +94,7 @@ CREATE TABLE ShortPricePaidData2024 (
     district VARCHAR(60),
     county VARCHAR(60)
 );
-
+--TODO: Select com count para mostrar o numero de tuplos/rows nas tabelas!
 -- Insert 2025 data into ShortPricePaidData2025 table
 INSERT INTO ShortPricePaidData2025 (transaction_id, price, transfer_date, postcode, property_type,
                                     old_new, paon, street, locality, town, district, county)

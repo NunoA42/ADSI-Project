@@ -1,6 +1,6 @@
 USE Project_DB;
 GO
-
+-- TODO: Justificar com estatisca o motivo destas letras!
 CREATE PARTITION FUNCTION pf_county (VARCHAR(60))
 AS RANGE LEFT
 FOR VALUES ('C', 'D', 'F', 'H', 'L', 'N', 'P', 'S', 'T');
