@@ -1,3 +1,6 @@
+DROP DATABASE IF EXISTS Project_DB;
+GO
+
 CREATE DATABASE Project_DB;
 GO
 
@@ -16,7 +19,7 @@ CREATE TABLE PricePaidData2025 (
     saon VARCHAR(60),
     street VARCHAR(60),
     locality VARCHAR(60),
-    city VARCHAR(60),
+    town VARCHAR(60),
     district VARCHAR(60),
     county VARCHAR(60),
     category CHAR(1),
@@ -35,7 +38,7 @@ CREATE TABLE PricePaidData2024 (
     saon VARCHAR(60),
     street VARCHAR(60),
     locality VARCHAR(60),
-    city VARCHAR(60),
+    town VARCHAR(60),
     district VARCHAR(60),
     county VARCHAR(60),
     category CHAR(1),
@@ -72,7 +75,7 @@ CREATE TABLE ShortPricePaidData2025 (
     paon VARCHAR(60),
     street VARCHAR(60),
     locality VARCHAR(60),
-    city VARCHAR(60),
+    town VARCHAR(60),
     district VARCHAR(60),
     county VARCHAR(60)
 );
@@ -87,23 +90,23 @@ CREATE TABLE ShortPricePaidData2024 (
     paon VARCHAR(60),
     street VARCHAR(60),
     locality VARCHAR(60),
-    city VARCHAR(60),
+    town VARCHAR(60),
     district VARCHAR(60),
     county VARCHAR(60)
 );
 
 -- Insert 2025 data into ShortPricePaidData2025 table
 INSERT INTO ShortPricePaidData2025 (transaction_id, price, transfer_date, postcode, property_type,
-                                    old_new, paon, street, locality, city, district, county)
+                                    old_new, paon, street, locality, town, district, county)
 SELECT 
     transaction_id, price, transfer_date, postcode, property_type, old_new,
-    paon, street, locality, city, district, county
+    paon, street, locality, town, district, county
 FROM PricePaidData2025;
 
 -- Insert 2024 data into ShortPricePaidData2024 table
 INSERT INTO ShortPricePaidData2024 (transaction_id, price, transfer_date, postcode, property_type,
-                                    old_new, paon, street, locality, city, district, county)
+                                    old_new, paon, street, locality, town, district, county)
 SELECT
     transaction_id, price, transfer_date, postcode, property_type, old_new,
-    paon, street, locality, city, district, county
+    paon, street, locality, town, district, county
 FROM PricePaidData2024;

@@ -22,7 +22,7 @@ CREATE TABLE ShortPricePaidData2025_Partitioned (
     paon            VARCHAR(60),
     street          VARCHAR(60),
     locality        VARCHAR(60),
-    city            VARCHAR(60),
+    town            VARCHAR(60),
     district        VARCHAR(60),
     county          VARCHAR(60)
 ) ON ps_county(county);
@@ -31,12 +31,12 @@ CREATE TABLE ShortPricePaidData2025_Partitioned (
 INSERT INTO ShortPricePaidData2025_Partitioned (
     transaction_id, price, transfer_date, postcode,
     property_type, old_new, paon, street,
-    locality, city, district, county
+    locality, town, district, county
 )
 SELECT
     transaction_id, price, transfer_date, postcode,
     property_type, old_new, paon, street,
-    locality, city, district, county
+    locality, town, district, county
 FROM ShortPricePaidData2025;
 
 -- Report the number of records contained in each partition 
