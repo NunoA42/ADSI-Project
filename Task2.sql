@@ -1,9 +1,37 @@
 USE Project_DB;
 GO
--- TODO: Justificar com estatisca o motivo destas letras!
+
+-- Analyze county initial-letter distribution
+WITH county_initial_counts AS (
+    SELECT
+        UPPER(LEFT(LTRIM(county),1)) AS county_initial,
+        COUNT(*) AS rows_per_initial
+    FROM ShortPricePaidData2025
+    GROUP BY UPPER(LEFT(LTRIM(county),1))
+),
+cumulative_distribution AS (
+    SELECT
+        county_initial,
+        rows_per_initial,
+        SUM(rows_per_initial) OVER (ORDER BY county_initial) * 100.0 / SUM(rows_per_initial) OVER () AS cumulative_percentage
+    FROM county_initial_counts
+)
+SELECT
+    county_initial,
+    rows_per_initial,
+    CAST(cumulative_percentage AS DECIMAL(6,2)) AS cumulative_percentage
+FROM cumulative_distribution
+ORDER BY county_initial;
+
+-- From the results of the previous analysis, we can partition the data in 5 balanced sections (around 20% each):
+-- ~20%: B-D (cumulative: 18.71%)
+-- ~40%: E-G (cumulative: 40.52%)
+-- ~60%: H-M (cumulative: 58.77%)
+-- ~80%: N-S (cumulative: 81.45%)
+-- 100%: T-Y (cumulative: 100%)
 CREATE PARTITION FUNCTION pf_county (VARCHAR(60))
 AS RANGE LEFT
-FOR VALUES ('C', 'D', 'F', 'H', 'L', 'N', 'P', 'S', 'T');
+FOR VALUES ('E', 'H', 'N', 'T');
 GO
 
 CREATE PARTITION SCHEME ps_county

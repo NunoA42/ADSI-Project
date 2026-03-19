@@ -94,7 +94,7 @@ CREATE TABLE ShortPricePaidData2024 (
     district VARCHAR(60),
     county VARCHAR(60)
 );
---TODO: Select com count para mostrar o numero de tuplos/rows nas tabelas!
+
 -- Insert 2025 data into ShortPricePaidData2025 table
 INSERT INTO ShortPricePaidData2025 (transaction_id, price, transfer_date, postcode, property_type,
                                     old_new, paon, street, locality, town, district, county)
@@ -110,3 +110,12 @@ SELECT
     transaction_id, price, transfer_date, postcode, property_type, old_new,
     paon, street, locality, town, district, county
 FROM PricePaidData2024;
+
+-- Show number of rows in each created table
+SELECT 'PricePaidData2025' AS table_name, COUNT(*) AS row_count FROM PricePaidData2025
+UNION ALL
+SELECT 'PricePaidData2024' AS table_name, COUNT(*) AS row_count FROM PricePaidData2024
+UNION ALL
+SELECT 'ShortPricePaidData2025' AS table_name, COUNT(*) AS row_count FROM ShortPricePaidData2025
+UNION ALL
+SELECT 'ShortPricePaidData2024' AS table_name, COUNT(*) AS row_count FROM ShortPricePaidData2024;
